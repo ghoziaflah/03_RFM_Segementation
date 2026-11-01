@@ -24,6 +24,7 @@ The analysis focuses on three key business questions:
 - **How can customer segmentation support business strategies?** Translate customer behavior patterns into opportunities for retention, reactivation, and targeted marketing initiatives.
 
 # 2. Result Summary of the Project
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/ed765a77-1b0c-4d4c-8c15-330a0b0b2a66" />
 
 The project analyzed **9,800 transaction records from 793 unique customers** using historical sales data from the Global Superstore dataset.
 
