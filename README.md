@@ -1,65 +1,110 @@
-# RFM Model Implementation for Global Superstore Customer Segmentation
-Proyek ini melakukan segmentasi pelanggan menggunakan metode RFM (Recency, Frequency, Monetary) untuk mendukung strategi pemasaran yang lebih tepat sasaran. Analisis dilengkapi dengan penerapan model machine learning dan visualisasi interaktif melalui dashboard untuk membantu pengambilan keputusan berbasis data.
-# Struktur Direktori
-```
-rfm-segementation/
-├── dataset/
-│   ├── data_clean.csv            # Dataset transaksi yang sudah dibersihkan
-│   ├── data_clustering.csv       # Dataset final agreggation dengan label cluster
-│   ├── top_products.csv          # Data produk favorit per segmen
-│   └── train.csv                 # Data mentah dari kaggle
-├── image/
-│   └── preview.png               # Screenshot tampilan dashboard
-├── model/
-│   ├── model_clustering.pkl      # Model K-Means yang sudah dilatih
-│   └── scaler_clustering.pkl     # Scaler untuk normalisasi input data baru
-├── Notebook_RFM_Clustering.ipynb # Notebook Jupyter untuk analisis RFM & K-Means
-├── README.md                     
-├── app.py                        # File utama untuk menjalankan Dashboard
-└── requirements.txt              # Daftar library Python yang dibutuhkan
-```
-# Anggota
-<br />1	Rizal Afandi                 - M004D5Y1738 
-<br />2	Muhammad Aflah Ghozi Susanto - M004D5Y1199 
-<br />3	Ahmad Haydar Alfarizqi	     - M004D5Y0095
-# Latar Belakang
-Perubahan perilaku pasar di era digital menuntut strategi pemasaran yang lebih cerdas dan tepat sasaran. Namun, banyak perusahaan masih menggunakan promosi massal yang kurang relevan dengan karakteristik pelanggan, sehingga menimbulkan inefisiensi biaya dan rendahnya tingkat konversi. Untuk mengatasinya, diperlukan peralihan menuju pengambilan keputusan berbasis data melalui segmentasi pelanggan yang lebih actionable. Metode RFM (Recency, Frequency, Monetary) menjadi solusi efektif karena mampu mengukur nilai pelanggan secara kuantitatif. Dengan dukungan algoritma Machine Learning dan dashboard visualisasi, analisis pelanggan dapat dilakukan dengan lebih cepat dan akurat untuk mendukung strategi personalized marketing.
+# RFM-Based Customer Segmentation & Retention Analysis on Global Superstore
 
-# Tujuan
-Proyek ini bertujuan untuk:
+## Project Background
 
-<br />1. Menerapkan analisis RFM (Recency, Frequency, Monetary) untuk mengukur nilai pelanggan berdasarkan perilaku transaksi mereka, sehingga dapat memberikan pemahaman kuantitatif mengenai tingkat kedekatan, aktivitas, dan kontribusi pelanggan terhadap perusahaan.
-<br />2. Mengembangkan model segmentasi pelanggan yang akurat dan representatif menggunakan algoritma clustering seperti K-Means dan mengevaluasi bagaimana setiap algoritma membentuk kelompok pelanggan yang memiliki karakteristik serupa.
-<br />3. Menyajikan hasil analisis dan segmentasi pelanggan melalui dashboard interaktif, sehingga wawasan yang dihasilkan dapat divisualisasikan secara jelas, mudah dipahami, dan mendukung pengambilan keputusan yang cepat, tepat, dan berbasis data.
+This project was developed as the final project of the **Machine Learning Bootcamp**, completed collaboratively by a team of three members. The project involved applying data analysis and machine learning techniques to identify customer purchasing patterns, develop meaningful customer segments, and derive business insights to support customer retention and revenue growth strategies.
 
-# Detail Pemodelan Clustering
-<br />-Dataset yang digunakan adalah dataset Online Retail Dataset dari kaggle
-<br />-Dilakukan tahapan pre-processing data untuk membersihkan dan menyiapkan data agar siap diolah
-<br />-Dilakukan perhitungan skor RFM untuk mendapatkan nilai Recency, Frequency, dan Monetary setiap pelanggan
-<br />-Algoritma yang dipilih adalah K-Means dengan Silhouette Score 0.3829 dengan pertimbangan visualisasi pemisahan cluster yang lebih baik
-<br />-Cluster diinterpretasikan berdasarkan karakteristik Recency, Frequency, dan Monetary
+### Team Members
+1. **Rizal Afandi** — M004D5Y1738
+2. **Muhammad Aflah Ghozi Susanto** — M004D5Y1199
+3. **Ahmad Haydar Alfarizqi** — M004D5Y0095
 
-# Dashboard
-   <img width="1919" height="943" alt="Screenshot 2025-12-15 121759" src="https://github.com/user-attachments/assets/36a45d1f-3167-4f45-abc8-70f1a998861d" />
-    
-# Deployment & Integrasi
-Dashboard ini dikembangkan menggunakan Streamlit dan di-hosting melalui Streamlit Cloud. Sistem ini terintegrasi penuh dengan repositori GitHub, sehingga menerapkan prinsip Continuous Deployment: setiap perubahan kode atau syntax pada file .py di GitHub akan langsung memicu pembaruan otomatis pada live dashboard secara real-time.
+# 1. Business Understanding
 
-# Langkah-Langkah Penggunaan
-<br />Dashboard memiliki tiga bagian utama:
-<br />-Overview : melihat karakteristik dataset yang digunakan dan eksplorasi varibel data secara general.
-<br />-Customer Segmentation : Melihat karakteristik dari setiap segmen customer yang terbentuk dari dataset tersebut
-<br />-Customer Detection : Menginput value RFM secara manual untuk melakukan testing Customer Segmentation berdasrkan model K-Means dan menghasilkan strategi bisnis untuk segment customer tersebut.
+Understanding customer purchasing behavior is essential for businesses to maintain customer relationships, improve retention, and maximize revenue contribution. However, customers do not contribute equally to business performance. Some customers purchase frequently and generate substantial revenue, while others purchase less frequently or have not made a purchase for an extended period.
 
-# Teknologi & Library
+Without a structured customer segmentation approach, businesses may struggle to identify their most valuable customers, recognize customers with declining engagement, and allocate marketing resources effectively.
 
-| Kategori            | Tools / Library                                              |
-|---------------------|--------------------------------------------------------------|
-| Bahasa              | Python                                                       |
-| Data Processing     | Pandas, NumPy                                                |
-| Visualisasi         | Matplotlib, Seaborn                                          |
-| ML Preprocessing    | StandardScaler, MinMaxScaler, PCA                            |
-| Clustering          | KMeans, Fuzzy C-Means (scikit-fuzzy)                         |
-| Evaluasi Model      | Silhouette Score                                             |
-| Tools Tambahan      | Yellowbrick (KElbowVisualizer), Google Colab                 |
+This project aims to analyze historical purchasing behavior using the Recency, Frequency, and Monetary (RFM) framework to identify distinct customer segments based on their purchasing patterns and financial contributions.
 
+The analysis focuses on three key business questions:
+
+- **Who are the most valuable customers?** Identify customers who contribute significantly to revenue through frequent purchasing activity and higher spending.
+- **Which customers may be at risk of disengagement?** Identify customers with longer periods since their last purchase and relatively low purchasing frequency.
+- **How can customer segmentation support business strategies?** Translate customer behavior patterns into opportunities for retention, reactivation, and targeted marketing initiatives.
+
+# 2. Result Summary of the Project
+
+The project analyzed **9,800 transaction records from 793 unique customers** using historical sales data from the Global Superstore dataset.
+
+Customers were segmented into three distinct groups based on their Recency, Frequency, and Monetary values using K-Means clustering.
+
+### Customer Segmentation Results
+
+| Customer Segment | Customers | Customer Share | Revenue Contribution |
+|---|---:|---:|---:|
+| Regular Customers | 399 | 50.3% | 33.8% |
+| At-Risk Customers | 111 | 14.0% | 7.9% |
+| High-Value Customers | 283 | 35.7% | 58.3% |
+| **Total** | **793** | **100%** | **100%** |
+
+### Key Segment Characteristics
+
+**1. High-Value Customers (Cluster 2)**
+
+- Represent 35.7% of the customer base.
+- Generate approximately 58.3% of total customer revenue.
+- Have the highest average purchase frequency at 8.85 transactions per customer.
+- Generate the highest average monetary value of approximately $4,660 per customer.
+- Have an average recency of approximately 79 days.
+
+This segment represents the most valuable customer group, making customer retention and relationship management important to sustaining revenue performance.
+
+**2. Regular Customers (Cluster 0)**
+
+- Represent 50.3% of the customer base.
+- Contribute approximately 33.8% of total customer revenue.
+- Have an average purchase frequency of 5.02 transactions.
+- Generate an average monetary value of approximately $1,913 per customer.
+- Have an average recency of approximately 90 days.
+
+This segment represents the largest customer group, offering opportunities to increase purchase frequency and encourage higher spending through targeted engagement and cross-selling initiatives.
+
+**3. At-Risk Customers (Cluster 1)**
+
+- Represent 14.0% of the customer base.
+- Contribute approximately 7.9% of total customer revenue.
+- Have the longest average recency of approximately 535 days.
+- Have the lowest average purchase frequency at 3.73 transactions.
+- Generate an average monetary value of approximately $1,616 per customer.
+
+This segment shows signs of declining purchasing engagement, making it a potential target for customer reactivation campaigns and win-back strategies.
+
+The clustering process achieved a **Silhouette Score of 0.383**, providing a moderate indication of separation between the identified customer segments.
+
+# 3. Key Takeaways
+
+- **Revenue is concentrated among high-value customers.** Although they represent only 35.7% of the customer base, this segment contributes approximately 58.3% of total revenue. Maintaining their engagement is therefore important for sustaining business performance.
+
+- **The largest customer segment presents an opportunity for revenue growth.** Regular customers account for more than half of the customer base but contribute approximately 33.8% of revenue. Increasing their purchase frequency and average spending could create additional revenue opportunities.
+
+- **A portion of customers shows signs of disengagement.** The at-risk segment has an average recency of approximately 535 days, indicating a substantial gap since their last recorded purchase. These customers may require targeted reactivation efforts to encourage repeat purchases.
+
+- **Customer segmentation enables more targeted marketing strategies.** Different purchasing behaviors require different engagement approaches. High-value customers may benefit from loyalty initiatives, regular customers from upselling and cross-selling campaigns, and at-risk customers from personalized win-back offers.
+
+- **Customer value should be evaluated beyond transaction volume.** Combining purchase recency, frequency, and monetary contribution provides a more comprehensive understanding of customer relationships than relying on revenue alone.
+
+# 4. Process
+
+- Importing the required Python libraries and loading historical sales transaction data from the Global Superstore dataset.
+- Performing data understanding, data inspection, and exploratory analysis to examine sales trends, customer purchasing patterns, product categories, and transaction distributions.
+- Conducting data cleaning, date preparation, and customer-level data aggregation to calculate Recency, Frequency, and Monetary (RFM) metrics.
+- Applying data scaling and K-Means clustering to group customers based on their purchasing behavior and determine distinct customer segments.
+- Evaluating cluster quality using the Silhouette Score and analyzing segment characteristics based on purchasing activity, revenue contribution, product preferences, and customer profiles.
+- Translating customer segmentation results into business insights and potential strategies for customer retention, reactivation, and revenue growth.
+
+# 5. Solution Statement
+
+This project provides a data-driven customer segmentation approach to help businesses better understand customer value and purchasing engagement.
+
+By combining Recency, Frequency, and Monetary metrics, the analysis identifies distinct customer groups with different purchasing characteristics and revenue contributions.
+
+The resulting segmentation can serve as a foundation for more targeted customer relationship and marketing strategies, enabling businesses to:
+
+- **Retain High-Value Customers:** Prioritize customer engagement and loyalty initiatives for customers who contribute significantly to revenue.
+- **Grow Regular Customers:** Encourage repeat purchases and increase customer spending through relevant product recommendations, cross-selling, and upselling opportunities.
+- **Reactivate At-Risk Customers:** Develop targeted win-back campaigns to reconnect with customers who have not made purchases for an extended period.
+- **Optimize Marketing Resources:** Allocate marketing efforts based on customer value, purchasing behavior, and engagement levels.
+- **Support Revenue Growth:** Use customer-level insights to identify opportunities for improving purchase frequency and long-term customer value.
+
+Ultimately, the objective is to move beyond treating all customers equally toward a more targeted, customer-centric business strategy that prioritizes retention, strengthens customer relationships, and maximizes revenue contribution.
